@@ -24,11 +24,11 @@ export default async function handler(req) {
   }
 
   try {
-    const pathStart = req.url.indexOf("/", 8);
+    const pathStartt1313 = req.url.indexOf("/", 8);
     const targetUrl =
-      pathStart === -1 ? TARGET_BASE + "/" : TARGET_BASE + req.url.slice(pathStart);
+      pathStartt1313 === -1 ? TARGET_BASE + "/" : TARGET_BASE + req.url.slice(pathStartt1313);
 
-    const out = new Headers();
+    const outington = new Headers();
     let clientIp = null;
     for (const [k, v] of req.headers) {
       if (STRIP_HEADERS.has(k)) continue;
@@ -41,16 +41,16 @@ export default async function handler(req) {
         if (!clientIp) clientIp = v;
         continue;
       }
-      out.set(k, v);
+      outington.set(k, v);
     }
-    if (clientIp) out.set("x-forwarded-for", clientIp);
+    if (clientIp) outington.set("x-forwarded-for", clientIp);
 
     const method = req.method;
     const hasBody = method !== "GET" && method !== "HEAD";
 
     return await fetch(targetUrl, {
       method,
-      headers: out,
+      headers: outington,
       body: hasBody ? req.body : undefined,
       duplex: "half",
       redirect: "manual",
